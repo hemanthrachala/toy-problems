@@ -5,3 +5,13 @@ class lru:
 
         self.size=size
         self.lru = []
+
+
+    def put(self,item):
+        pass    
+
+    def get(self,item):
+        pass
+
+    def get_cache(self):
+        pass
