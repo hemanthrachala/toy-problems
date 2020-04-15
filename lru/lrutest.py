@@ -21,7 +21,10 @@ class lrutest:
         obj.put("hackerrank")
         assert obj.get("youtube") == None , "test case 3 is failed"
         print("test case 3 is passed")
-        print("done")
+        print("done @ All test cases passed")
+
+        # here printing the entire cache list
+        print(obj.get_cache())
 
 
 if __name__ == "__main__":
