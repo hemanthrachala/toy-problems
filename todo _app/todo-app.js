@@ -22,6 +22,21 @@ class Task {
     }
 }
 
+function render (){
+    
+    const listUi = document.getElementById("todo");
+
+    listUi.innerHTML = "";
+
+    if (taskList.length === 0) listUi.innerHTML="no tasks ___ "
+
+    taskList.forEach((task) => {
+
+        listUi.innerHTML += task.toString();
+    })
+
+}
+
 
 function createTask(){
 
@@ -35,9 +50,7 @@ function addTask(task){
 
     taskList.push(task);
 
-    const list = document.getElementById("todo")
-
-    list.innerHTML += task.toString()
+    render();
 }
 
 function deleteTask(taskId) {
@@ -49,6 +62,7 @@ function deleteTask(taskId) {
             return t;
         }
     );
+    render();
     console.log(taskList);
 
 }
