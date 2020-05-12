@@ -8,7 +8,11 @@ class Task {
     }
 
     toString() {
-        return "<li>"+this.name+"</li>"
+        let htmlText= "<li>"+this.name
+        htmlText += this.dueDate.getDate()+"/"+this.dueDate.getMonth();
+        htmlText += '<input type="checkbox" name="isDone" id="isDone">'
+        htmlText += "</li>";
+        return htmlText;
     }
 }
 
