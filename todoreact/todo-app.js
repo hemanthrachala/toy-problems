@@ -21,7 +21,7 @@ class TodoList extends React.Component {
           {TaskList}
         </ol>
         <button onClick = {this.addTask}>
-          ADD TASK
+          ADD TASKS
         </button>
       </div>
 
