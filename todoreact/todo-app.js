@@ -1,28 +1,36 @@
 function Task(props) {
-return <li>{props.name}, {new Date().toLocaleTimeString()}</li>
+  return <li>{props.name}, {props.dueDate.toLocaleTimeString()}</li>
 }
 
 class TodoList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.TaskList = this.props.list.map((t) =>
-        <Task key={t.id} name = {t.name} />
-    );
+    this.state = {list: props.list};
+
+    this.handleAddTask = this.handleAddTask.bind(this);
   }
-  // addTask() {
-  //   console.log("add Task");
-  // }
+  handleAddTask(task) {
+    // need to push the task into the list
+    this.state.list.push(task);
+    this.setState({list: this.state.list})
+    console.log("add Task");
+  }
 
   render() {
+    // const task = {};
+    // const task = {};
 
     return (
       <div>
-        <h1>TODO</h1>
+        <h1>TODO LIST</h1>
         <ol>
-            {this.TaskList}
+            {
+              this.state.list.map((t) =>
+                <Task key={t.id} name = {t.name} dueDate={t.dueDate}/>)
+            }
         </ol>
-        <TaskNameForm/>
+        <TaskNameForm onAddTask= {this.handleAddTask} />
       </div>
 
     );
@@ -42,16 +50,21 @@ class TaskNameForm extends React.Component {
   }
   //to add task
   handleSubmit(event) {
+    const taskList = this.props.taskList;
     // to create a task object
-    task = {id:Date.now(), name: this.state.value, dueDate:Date.now()} 
+    const task=({id:Date.now(), name: this.state.value, dueDate:new Date()}); 
 
     //add the task object to task list
+    // tasks.push(task);
+    this.props.onAddTask(task);
+    // console.log(tasks);
     event.preventDefault();
 
   }
 
   // to set a state
   handleChange(event) {
+    // to set the state of the component
     this.setState({value: event.target.value});
       
   }
@@ -68,13 +81,13 @@ class TaskNameForm extends React.Component {
   
 }
 
-const tasks = [
-  {id:0, name: "Welcome task"}, 
-  {id:1,name: "first task"},
-  {id:2,name: "second task"},
-  {id:3,name: "third task"}]
+// const tasks = [
+//   {id:0, name: "Welcome task"}, 
+//   {id:1,name: "first task"},
+//   {id:2,name: "second task"},
+//   {id:3,name: "third task"}]
 ReactDOM.render(
-    <TodoList list={tasks}/>,
+    <TodoList list={[]}/>,
     document.getElementById('todo')
   );
 
